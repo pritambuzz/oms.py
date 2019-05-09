@@ -189,9 +189,13 @@ class Microservice(MicroserviceYML, MicroserviceDockerfile):
                 return result
 
         self.logger.debug(f'Registering Flask endpoint: {rule!r}')
-        self.flask.add_url_rule(
-            rule=rule, endpoint=endpoint, view_func=view_func
-        )
+        try:
+            self.flask.add_url_rule(
+                rule=rule, endpoint=endpoint, view_func=view_func
+            )
+        # TODO: Fix this.
+        except AssertionError:
+            pass
 
     def _register_endpoints(self):
         for endpoint in self.endpoints.values():

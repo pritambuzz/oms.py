@@ -28,7 +28,7 @@ def service(micro):
 
 @pytest.fixture
 def flask(f, service):
-    service.register(f)
+    service.add(f)
     return service._flask
 
 
@@ -38,37 +38,37 @@ def flask(f, service):
 
 
 def test_basic_service_registation(f, service):
-    service.register(f=f)
+    service.add(f=f)
 
     assert 'work' in service.endpoints
 
 
 def test_named_service_registation(f, service):
-    service.register(f=f, name='test')
+    service.add(f=f, name='test')
 
     assert 'test' in service.endpoints
 
 
 def test_custom_uri_service_registation(f, service):
-    service.register(f=f, name='test', uri='/not-test')
+    service.add(f=f, name='test', path='/not-test')
 
     assert 'test' in service.endpoints
-    assert service.endpoints['test']['uri'] == '/not-test'
+    assert service.endpoints['test']['path'] == '/not-test'
 
 
 def test_argument_detection(f, service):
-    service.register(f=f)
+    service.add(f=f)
 
     assert 'work' in service.endpoints
     assert 'prefix' in service.endpoints['work']['f'].__annotations__
 
 
 def test_yaml_generation(f, service):
-    service.register(f=f, name='hi', uri='/bye')
+    service.add(f=f, name='hi', path='/bye')
 
     data = service._render()
     assert 'omg' in data
     assert 'actions' in data
 
     assert data['actions']['hi']['http']['path'] == '/bye'
-    assert data['actions']['hi']['http']['method'] == '/get'
+    assert data['actions']['hi']['http']['method'] == 'get'

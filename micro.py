@@ -1,8 +1,7 @@
+import logging
 import os
-import functools
 
 import delegator
-import logme
 import yaml
 import waitress
 from flask import Flask, jsonify, request, Response, make_response
@@ -44,7 +43,7 @@ class MicroserviceDockerfile:
                     f.write(DOCKERFILE_TEMPLATE)
 
 
-@logme.log
+# @logme.log
 class MicroserviceYML:
     @property
     def _yaml_path(self):
@@ -81,9 +80,10 @@ class MicroserviceYML:
                     f.write(yaml.safe_dump(self._render()))
 
 
-@logme.log
+# @logme.log
 class Microservice(MicroserviceYML, MicroserviceDockerfile):
     def __init__(self, name, root_path='.'):
+        self.logger = logging.getLogger(__name__)
         self.name = name
         self.root_path = os.path.abspath(root_path)
         self.endpoints = {}

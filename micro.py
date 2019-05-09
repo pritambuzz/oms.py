@@ -129,9 +129,11 @@ class Microservice(MicroserviceYML, MicroserviceDockerfile):
 
         self._register_endpoints()
 
-    def register(self, path, **kwargs):
+    def register(
+        self, name: str = None, path: str = None, method: str = 'get'
+    ):
         def decorator(f):
-            self.add(f=f, path=path, **kwargs)
+            self.add(f=f, path=path, method=method)
             return f
 
         return decorator

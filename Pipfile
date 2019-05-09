@@ -7,14 +7,9 @@ verify_ssl = true
 pytest = "*"
 flake8 = "*"
 twine = "*"
-omg-micro = {editable = true,path = "."}
 
 [packages]
-delegator-py = "*"
-pyyaml = "*"
-flask = "*"
-waitress = "*"
-logme = "*"
+omg-micro = {editable = true,path = "."}
 
 [requires]
 python_version = "3.7"

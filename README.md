@@ -74,6 +74,6 @@ $ omg run uuid4 -a prefix='user-'
 $ pip install omg-micro
 ```
 
-**P.S.** This doesn't work yet. :)
+**P.S.** Do provide feedback, if you desire! :)
 
 ✨ 🍰 ✨

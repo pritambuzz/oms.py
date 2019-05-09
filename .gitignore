@@ -3,3 +3,6 @@
 microservice.yml
 Dockerfile
 t.py
+build/**
+dist/**
+omg_micro.egg-info/**

@@ -1,14 +1,14 @@
 actions:
-  gen_uuid4:
+  new:
+    help: Generates a UUID, with a given prefix.
     arguments:
       prefix:
         in: query
         required: true
         type: string
-    help: Generates a UUID, with a given prefix.
     http:
       method: get
-      path: /uuid4
+      path: /new
       port: 8080
     output:
       type: string

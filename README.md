@@ -15,16 +15,19 @@ from uuid import uuid4
 
 service = micro.Service(name='uuid')
 
-@service.register(path='/uuid4', method='get')
-def gen_uuid4(prefix: str) -> str:
+
+@service.register()
+def new(prefix: str) -> str:
     """Generates a UUID, with a given prefix."""
     return f'{prefix}{uuid4().hex}'
 
+
 # Alternative Syntax:
-# service.add(f=gen_uuid4)
+# service.add(f=new)
 
 if __name__ == '__main__':
     service.serve(ensure=True)
+
 ```
 
 If not available on disk, the required `Dockerfile` and `microservice.yml` files will automatically be generated, for your application:
@@ -32,16 +35,16 @@ If not available on disk, the required `Dockerfile` and `microservice.yml` files
 ```shell
 $ cat microservice.yml
 actions:
-  gen_uuid4:
+  new:
+    help: Generates a UUID, with a given prefix.
     arguments:
       prefix:
         in: query
         required: true
         type: string
-    help: Generates a UUID, with a given prefix.
     http:
       method: get
-      path: /uuid4
+      path: /new
       port: 8080
     output:
       type: string
@@ -51,6 +54,7 @@ lifecycle:
     - python3
     - /app/service.py
 omg: 1
+
 ```
 
 ```shell

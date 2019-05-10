@@ -98,7 +98,10 @@ class Microservice(MicroserviceYML, MicroserviceDockerfile):
         # Ensure the YAML exists.
         self.ensure_yaml(skip_if_exists=skip_if_exists)
 
-    def serve(self, **kwargs):
+    def serve(self, ensure=False, **kwargs):
+        # Ensure, if needed.
+        if ensure:
+            self.ensure()
 
         # Bind to PORT, automatically.
         listen = f'*:{PORT}'

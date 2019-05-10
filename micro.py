@@ -1,7 +1,6 @@
 import logging
 import os
 
-import delegator
 import yaml
 import waitress
 from flask import Flask, jsonify, request, Response, make_response
@@ -13,6 +12,9 @@ DEFAULT_ARG_TYPE = str
 PORT = int(os.environ.get('PORT', DEFAULT_PORT))
 YAML_TEMPLATE = """
 omg: 1
+lifecycle:
+  startup:
+    command: ["python3", "/app/service.py"]
 actions:
 """.strip()
 DOCKERFILE_TEMPLATE = f"""
@@ -27,16 +29,14 @@ CMD ["python3", "service.py"]
 class MicroserviceDockerfile:
     @property
     def _dockerfile_path(self):
-        return './Dockerfile'
+        return f'{os.getcwd()}./Dockerfile'
 
     def ensure_dockerfile(self, skip_if_exists=True):
         if skip_if_exists:
             if os.path.isfile(os.path.abspath(self._dockerfile_path)):
-                self.logger.debug(
-                    f'Dockerfile {self._dockerfile_path!r} already exists!'
-                )
+                print(f'Dockerfile {self._dockerfile_path!r} already exists!')
             else:
-                self.logger.info(f'Writing {self._dockerfile_path!r} to disk.')
+                print(f'Writing {self._dockerfile_path!r} to disk.')
 
                 # Write the template Dockerfile to disk.
                 with open(self._dockerfile_path, 'w') as f:
@@ -47,14 +47,13 @@ class MicroserviceDockerfile:
 class MicroserviceYML:
     @property
     def _yaml_path(self):
-        return f'./microservice.yml'
+        return f'{os.getcwd()}./microservice.yml'
 
     def _render(self):
         data = yaml.safe_load(YAML_TEMPLATE)
         data['actions'] = {}
 
         for endpoint in self.endpoints.values():
-            # data['actions'][endpoint['name']] = {}
 
             data['actions'][endpoint['name']] = {
                 'help': endpoint['f'].__doc__,
@@ -71,11 +70,11 @@ class MicroserviceYML:
     def ensure_yaml(self, skip_if_exists=True):
         if skip_if_exists:
             if os.path.isfile(os.path.abspath(self._yaml_path)):
-                self.logger.debug(
+                print(
                     f'Microservice Manifest {self._yaml_path!r} already exists!'
                 )
             else:
-                self.logger.info(f'Writing {self._yaml_path!r} to disk.')
+                print(f'Writing {self._yaml_path!r} to disk.')
                 with open(self._yaml_path, 'w') as f:
                     f.write(yaml.safe_dump(self._render()))
 
@@ -88,7 +87,7 @@ class Microservice(MicroserviceYML, MicroserviceDockerfile):
         self.root_path = os.path.abspath(root_path)
         self.endpoints = {}
 
-        self.logger.debug(f'Initiating {self.name!r} service.')
+        print(f'Initiating {self.name!r} service.')
 
         self.flask = Flask(__name__)
 
@@ -106,7 +105,7 @@ class Microservice(MicroserviceYML, MicroserviceDockerfile):
         if 'listen' in kwargs:
             listen = kwargs.pop('listen')
 
-        self.logger.info(f'Serving on: {listen!r}')
+        print(f'Serving on: {listen!r}')
 
         waitress.serve(app=self.flask, listen=listen, **kwargs)
         pass
@@ -164,7 +163,7 @@ class Microservice(MicroserviceYML, MicroserviceDockerfile):
                 # TODO:  gab balues from multipart upload.
 
             # Pass all query parameters as function arguments, if applicable.
-            self.logger.info(f'Calling {rule!r} with args: {params!r}.')
+            print(f'Calling {rule!r} with args: {params!r}.')
 
             # Call the function.
             try:
@@ -188,13 +187,14 @@ class Microservice(MicroserviceYML, MicroserviceDockerfile):
             except ValueError:
                 return result
 
-        self.logger.debug(f'Registering Flask endpoint: {rule!r}')
         try:
             self.flask.add_url_rule(
                 rule=rule, endpoint=endpoint, view_func=view_func
             )
-        # TODO: Fix this.
+            print(f'Registering Flask endpoint: {rule!r}')
+
         except AssertionError:
+            # TODO: Fix this.
             pass
 
     def _register_endpoints(self):

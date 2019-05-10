@@ -29,7 +29,7 @@ CMD ["python3", "service.py"]
 class MicroserviceDockerfile:
     @property
     def _dockerfile_path(self):
-        return f'{os.getcwd()}./Dockerfile'
+        return './Dockerfile'
 
     def ensure_dockerfile(self, skip_if_exists=True):
         if skip_if_exists:
@@ -47,7 +47,7 @@ class MicroserviceDockerfile:
 class MicroserviceYML:
     @property
     def _yaml_path(self):
-        return f'{os.getcwd()}./microservice.yml'
+        return './microservice.yml'
 
     def _render(self):
         data = yaml.safe_load(YAML_TEMPLATE)

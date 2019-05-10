@@ -64,7 +64,7 @@ Now, run your microservice!
 ```shell
 $ python service.py
 2019-05-09 14:45:39,342 - micro - DEBUG - Initiating 'uuid' service.
-2019-05-09 14:45:39,344 - micro - DEBUG - Registering Flask endpoint: '/uuid4'
+2019-05-09 14:45:39,344 - micro - DEBUG - Registering Flask endpoint: '/new'
 2019-05-09 14:45:39,344 - micro - DEBUG - Dockerfile './Dockerfile' already exists!
 2019-05-09 14:45:39,345 - micro - DEBUG - Microservice Manifest './microservice.yml' already exists!
 2019-05-09 14:45:39,346 - micro - INFO - Serving on: '*:8080'

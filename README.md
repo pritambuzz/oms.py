@@ -75,7 +75,7 @@ This will spawn a Flask application (using the production-ready [waitress web se
 Or, use the [omg-cli](https://github.com/microservices/omg-cli):
 
 ```shell
-$ omg run uuid4 -a prefix='user-'
+$ omg run new -a prefix='user-'
 …
 ```
 

@@ -16,6 +16,17 @@ omg: 1
 lifecycle:
   startup:
     command: ["python3", "/app/service.py"]
+info:
+  version: XXXXXX
+  title: XXXXXX
+  description: XXXXXX
+  contact:
+    name: XXXXXX
+    url: XXXXXX
+    email: XXXXXX
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
 actions:
 """.strip()
 DOCKERFILE_TEMPLATE = f"""

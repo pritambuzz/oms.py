@@ -14,7 +14,7 @@ from setuptools import find_packages, setup, Command
 # Package meta-data.
 NAME = 'omg-micro'
 DESCRIPTION = 'A micro-framework for the OMG, and code written in Python 3.6+.'
-URL = 'https://github.com/kennethreitz/omg-micro'
+URL = 'https://github.com/microservices/omg-micro'
 EMAIL = 'me@kennethreitz.org'
 AUTHOR = 'Asyncy'
 REQUIRES_PYTHON = '>=3.6.0'

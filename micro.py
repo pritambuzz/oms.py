@@ -17,7 +17,7 @@ lifecycle:
   startup:
     command: ["python3", "/app/service.py"]
 info:
-  version: XXXXXX
+  version: 0.0.0
   title: XXXXXX
   description: XXXXXX
   contact:

@@ -12,6 +12,17 @@ actions:
       port: 8080
     output:
       type: string
+info:
+  contact:
+    email: XXXXXX
+    name: XXXXXX
+    url: XXXXXX
+  description: XXXXXX
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  title: XXXXXX
+  version: 0.0.0
 lifecycle:
   startup:
     command:

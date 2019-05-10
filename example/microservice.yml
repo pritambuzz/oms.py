@@ -1,0 +1,20 @@
+actions:
+  gen_uuid4:
+    arguments:
+      prefix:
+        in: query
+        required: true
+        type: string
+    help: Generates a UUID, with a given prefix.
+    http:
+      method: get
+      path: /uuid4
+      port: 8080
+    output:
+      type: string
+lifecycle:
+  startup:
+    command:
+    - python3
+    - /app/service.py
+omg: 1

@@ -32,7 +32,12 @@ If not available on disk, the required `Dockerfile` and `microservice.yml` files
 ```shell
 $ cat microservice.yml
 actions:
-  uuid4:
+  gen_uuid4:
+    arguments:
+      prefix:
+        in: query
+        required: true
+        type: string
     help: Generates a UUID, with a given prefix.
     http:
       method: get
@@ -40,6 +45,11 @@ actions:
       port: 8080
     output:
       type: string
+lifecycle:
+  startup:
+    command:
+    - python3
+    - /app/service.py
 omg: 1
 ```
 
@@ -60,6 +70,8 @@ $ python service.py
 2019-05-09 14:45:39,345 - micro - DEBUG - Microservice Manifest './microservice.yml' already exists!
 2019-05-09 14:45:39,346 - micro - INFO - Serving on: '*:8080'
 ```
+
+This will spawn a Flask application (using the production-ready [waitress web server](https://docs.pylonsproject.org/projects/waitress/en/stable/)), preconfigured to serve the masses!
 
 Or, use the [omg-cli](https://github.com/microservices/omg-cli):
 

@@ -9,7 +9,7 @@ flake8 = "*"
 twine = "*"
 
 [packages]
-omg-micro = {editable = true,path = "."}
+omg-micro = {editable = true, path = "."}
 
 [requires]
 python_version = "3.7"

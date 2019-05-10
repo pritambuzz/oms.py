@@ -20,9 +20,7 @@ actions:
 """.strip()
 DOCKERFILE_TEMPLATE = f"""
 FROM kennethreitz/pipenv
-
 COPY . /app
-
 CMD ["python3", "service.py"]
 """.strip()
 
@@ -50,22 +48,56 @@ class MicroserviceYML:
     def _yaml_path(self):
         return './microservice.yml'
 
+    @staticmethod
+    def _yaml_type_for_annotation(t):
+        mapping = {
+            int: 'int',
+            float: 'float',
+            str: 'string',
+            list: 'list',
+            dict: 'map',
+            bool: 'boolean',
+            'any': 'any',
+        }
+
+        return mapping[t]
+
     def _render(self):
         data = yaml.safe_load(YAML_TEMPLATE)
         data['actions'] = {}
 
         for endpoint in self.endpoints.values():
 
+            annotations = endpoint['f'].__annotations__.copy()
+
             data['actions'][endpoint['name']] = {
                 'help': endpoint['f'].__doc__,
-                # TODO: type of output from type annoytations.
-                'output': {'type': 'string'},
+                'output': {
+                    'type': self._yaml_type_for_annotation(
+                        # Default to 'any' type for inoming type annotations.
+                        # Also, remove 'return', since we don't need it later.
+                        annotations.pop('return', 'any')
+                    )
+                },
                 'http': {
                     'path': endpoint['path'],
                     'method': endpoint['method'],
                     'port': PORT,
                 },
             }
+
+            # Add argument information, if available.
+            if annotations:
+                data['actions'][endpoint['name']]['arguments'] = {}
+
+                for arg in annotations:
+                    data['actions'][endpoint['name']]['arguments'][arg] = {
+                        'type': self._yaml_type_for_annotation(
+                            annotations[arg]
+                        ),
+                        'required': True,
+                        'in': 'query',
+                    }
 
         return data
 

@@ -24,7 +24,7 @@ def gen_uuid4(prefix: str) -> str:
 # service.add(f=gen_uuid4)
 
 if __name__ == '__main__':
-    service.serve()
+    service.serve(ensure=True)
 ```
 
 If not available on disk, the required `Dockerfile` and `microservice.yml` files will automatically be generated, for your application:

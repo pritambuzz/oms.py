@@ -1,7 +1,7 @@
 .vscode/**
 .pytest_cache/**
-./microservice.yml
-./Dockerfile
+microservice.yml
+Dockerfile
 t.py
 build/**
 dist/**

@@ -3,6 +3,7 @@ import os
 
 import yaml
 import waitress
+from setproctitle import setproctitle
 from flask import Flask, jsonify, request, Response, make_response
 
 __all__ = ['Service']
@@ -57,6 +58,7 @@ class MicroserviceYML:
 
             data['actions'][endpoint['name']] = {
                 'help': endpoint['f'].__doc__,
+                # TODO: type of output from type annoytations.
                 'output': {'type': 'string'},
                 'http': {
                     'path': endpoint['path'],
@@ -99,6 +101,9 @@ class Microservice(MicroserviceYML, MicroserviceDockerfile):
         self.ensure_yaml(skip_if_exists=skip_if_exists)
 
     def serve(self, ensure=False, **kwargs):
+        # Set the process title.
+        setproctitle(self.name)
+
         # Ensure, if needed.
         if ensure:
             self.ensure()
@@ -108,10 +113,8 @@ class Microservice(MicroserviceYML, MicroserviceDockerfile):
         if 'listen' in kwargs:
             listen = kwargs.pop('listen')
 
-        print(f'Serving on: {listen!r}')
-
+        # Serve the service.
         waitress.serve(app=self.flask, listen=listen, **kwargs)
-        pass
 
     def add(
         self, f, *, name: str = None, path: str = None, method: str = 'get'

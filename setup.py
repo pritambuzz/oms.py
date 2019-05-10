@@ -21,7 +21,7 @@ REQUIRES_PYTHON = '>=3.6.0'
 VERSION = '0.2.4'
 
 # What packages are required for this module to be executed?
-REQUIRED = ['pyyaml', 'Flask', 'waitress']
+REQUIRED = ['pyyaml', 'Flask', 'waitress', 'setproctitle']
 
 # What packages are optional?
 EXTRAS = {

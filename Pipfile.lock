@@ -23,13 +23,6 @@
             ],
             "version": "==7.0"
         },
-        "delegator.py": {
-            "hashes": [
-                "sha256:814657d96b98a244c479e3d5f6e9e850ac333e85f807d6bc846e72bbb2537806",
-                "sha256:e6cc9cedab9ae59b169ee0422e17231adedadb144e63c0b5a60e6ff8adf8521b"
-            ],
-            "version": "==0.1.1"
-        },
         "flask": {
             "hashes": [
                 "sha256:2271c0070dbcb5275fad4a82e29f23ab92682dc45f9dfbc22c02ba9b9322ce48",
@@ -88,20 +81,6 @@
             "editable": true,
             "path": "."
         },
-        "pexpect": {
-            "hashes": [
-                "sha256:2094eefdfcf37a1fdbfb9aa090862c1a4878e5c7e0e7e7088bdb511c558e5cd1",
-                "sha256:9e2c1fd0e6ee3a49b28f95d4b33bc389c89b20af6a1255906e90ff1262ce62eb"
-            ],
-            "version": "==4.7.0"
-        },
-        "ptyprocess": {
-            "hashes": [
-                "sha256:923f299cc5ad920c68f2bc0bc98b75b9f838b93b599941a6b63ddbc2476394c0",
-                "sha256:d7cc528d76e76342423ca640335bd3633420dc1366f258cb31d05e865ef5ca1f"
-            ],
-            "version": "==0.6.0"
-        },
         "pyyaml": {
             "hashes": [
                 "sha256:1adecc22f88d38052fb787d959f003811ca858b799590a5eaa70e63dca50308c",
@@ -117,6 +96,13 @@
                 "sha256:e23d0cc5299223dcc37885dae624f382297717e459ea24053709675a976a3e19"
             ],
             "version": "==5.1"
+        },
+        "setproctitle": {
+            "hashes": [
+                "sha256:6283b7a58477dd8478fbb9e76defb37968ee4ba47b05ec1c053cb39638bd7398",
+                "sha256:6a035eddac62898786aed2c2eee7334c28cfc8106e8eb29fdd117cac56c6cdf0"
+            ],
+            "version": "==1.1.10"
         },
         "waitress": {
             "hashes": [

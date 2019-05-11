@@ -18,7 +18,7 @@ URL = 'https://github.com/microservices/omg-micro'
 EMAIL = 'me@kennethreitz.org'
 AUTHOR = 'Asyncy'
 REQUIRES_PYTHON = '>=3.6.0'
-VERSION = '0.3.2'
+VERSION = '0.3.3'
 
 # What packages are required for this module to be executed?
 REQUIRED = ['pyyaml', 'Flask', 'waitress', 'setproctitle']

@@ -238,7 +238,10 @@ class Microservice(MicroserviceYML, MicroserviceDockerfile):
 
         try:
             self.flask.add_url_rule(
-                rule=rule, endpoint=endpoint, view_func=view_func
+                rule=rule,
+                endpoint=endpoint,
+                view_func=view_func,
+                methods=['GET', 'HEAD', 'POST', 'PATCH', 'PUT', 'DELETE'],
             )
             print(f'Registering Flask endpoint: {rule!r}')
 

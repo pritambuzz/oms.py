@@ -1,4 +1,4 @@
-# Micro Framework: omg.py
+# omg.py
 
 A micro-framework for the excellent **[Open Microservices Guide](https://microservices.guide/)**, for suppportive code written in Python 3.6+.
 
@@ -10,10 +10,10 @@ A micro-framework for the excellent **[Open Microservices Guide](https://microse
 $ cat service.py
 ```
 ```python
-import micro
+import omg
 from uuid import uuid4
 
-service = micro.Service(name='uuid')
+service = omg.Microservice(name='uuid')
 
 @service.register()
 def new(prefix: str) -> str:
@@ -22,8 +22,9 @@ def new(prefix: str) -> str:
 
 if __name__ == '__main__':
     service.serve(ensure=True)
-
 ```
+
+`register` takes some optional arguments: `name` and `path`. You can also call `service.add(f=new)` instead.
 
 If not available on disk, the required `Dockerfile` and `microservice.yml` files will automatically be generated, for your application:
 
@@ -82,7 +83,7 @@ $ omg run new -a prefix='user-'
 ## Installation
 
 ```shell
-$ pip install omg-micro
+$ pip install omg.py
 ```
 
 **P.S.** Do provide feedback, if you desire! :)

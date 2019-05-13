@@ -1,8 +1,8 @@
-# OMG-Micro Framework (for Python)
+# OMG Framework: Micro.py
 
 A micro-framework for the excellent **[Open Microservices Guide](https://microservices.guide/)**, for suppportive code written in Python 3.6+.
 
-**Note**: this is pre-release software, and is subject to improvement. Contributions are welcome! This framework is being developed for [other languages](https://github.com/microservices?utf8=%E2%9C%93&q=omg-micro&type=&language=), as well. If you'd like to help, [let us know](kenneth@storyscript.io)!
+**Note**: this is pre-release software, and is subject to improvement. Contributions are welcome! This framework is being developed for [other languages](https://github.com/microservices?utf8=%E2%9C%93&q=omg.*&type=&language=), as well. If you'd like to help, [let us know](kenneth@storyscript.io)!
 
 # Intended / Example Usage
 

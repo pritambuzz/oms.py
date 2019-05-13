@@ -24,7 +24,7 @@ if __name__ == '__main__':
     service.serve(ensure=True)
 ```
 
-`register` takes some optional arguments: `name` and `path`. You can also call `service.add(f=new)` instead.
+`register` takes some optional arguments: `name` and `path`. You can also call `service.add(f=new)`, instead.
 
 If not available on disk, the required `Dockerfile` and `microservice.yml` files will automatically be generated, for your application:
 

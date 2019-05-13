@@ -14,7 +14,7 @@ from setuptools import find_packages, setup, Command
 # Package meta-data.
 NAME = 'omg-micro'
 DESCRIPTION = 'A micro-framework for the OMG, and code written in Python 3.6+.'
-URL = 'https://github.com/microservices/omg-micro'
+URL = 'https://github.com/microservices/omg.py'
 EMAIL = 'me@kennethreitz.org'
 AUTHOR = 'Asyncy'
 REQUIRES_PYTHON = '>=3.6.0'
@@ -107,7 +107,7 @@ setup(
     #     exclude=["tests", "*.tests", "*.tests.*", "tests.*"]
     # ),
     # If your package is a single module, use this instead of 'packages':
-    py_modules=['micro'],
+    py_modules=['omg'],
     # entry_points={
     #     'console_scripts': ['mycli=mymodule:cli'],
     # },

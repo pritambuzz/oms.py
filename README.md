@@ -1,4 +1,4 @@
-# OMG Framework: Micro.py
+# Micro Framework: omg.py
 
 A micro-framework for the excellent **[Open Microservices Guide](https://microservices.guide/)**, for suppportive code written in Python 3.6+.
 

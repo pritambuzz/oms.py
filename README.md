@@ -28,7 +28,7 @@ if __name__ == '__main__':
 
 If not available on disk, the required `Dockerfile` and `microservice.yml` files will automatically be generated, for your application:
 
-```shell
+```yaml
 $ cat microservice.yml
 actions:
   new:

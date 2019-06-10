@@ -21,12 +21,18 @@ def new(prefix: str) -> str:
     return f'{prefix}{uuid4().hex}'
 
 if __name__ == '__main__':
-    service.serve(ensure=True)
+    service.serve()
 ```
 
 `register` takes some optional arguments: `name` and `path`. You can also call `service.add(f=new)`, instead.
 
-If not available on disk, the required `Dockerfile` and `microservice.yml` files will automatically be generated, for your application:
+Next, run the command `$ omg-generate` `microservice.yml` files will automatically be generated, for your application:
+
+```shell
+$ omg-generate service:service
+…
+'microservice.yml' written to disk!
+```
 
 ```yaml
 $ cat microservice.yml

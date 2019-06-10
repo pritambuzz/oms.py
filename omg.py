@@ -1,10 +1,14 @@
 import logging
 import os
+import sys
+import traceback
 
-import yaml
 import waitress
+import yaml
+from docopt import docopt
+from flask import Flask, Response, jsonify, make_response, request
+from inflection import camelize, underscore
 from setproctitle import setproctitle
-from flask import Flask, jsonify, request, Response, make_response
 
 __all__ = ['Service']
 
@@ -28,11 +32,6 @@ info:
     name: MIT
     url: https://opensource.org/licenses/MIT
 actions:
-""".strip()
-DOCKERFILE_TEMPLATE = f"""
-FROM kennethreitz/pipenv
-COPY . /app
-CMD ["python3", "service.py"]
 """.strip()
 
 
@@ -123,6 +122,10 @@ class MicroserviceYML:
                 with open(self._yaml_path, 'w') as f:
                     f.write(yaml.safe_dump(self._render()))
 
+        else:
+            with open(self._yaml_path, 'w') as f:
+                f.write(yaml.safe_dump(self._render()))
+
 
 # @logme.log
 class Microservice(MicroserviceYML, MicroserviceDockerfile):
@@ -163,9 +166,9 @@ class Microservice(MicroserviceYML, MicroserviceDockerfile):
         self, f, *, name: str = None, path: str = None, method: str = 'get'
     ):
         # Infer the service name.
-        name = name or f.__name__
+        name = name or camelize(f.__name__)
         # Infer the service URI. Note: Expects '/', like Flask.
-        path = path or f'/{name}'
+        path = path or f'/{underscore(name)}'
 
         # Store the service, for later use.
         self.endpoints[name] = {
@@ -251,4 +254,68 @@ class Microservice(MicroserviceYML, MicroserviceDockerfile):
             self._register_endpoint(endpoint)
 
 
-Service = Microservice
+def import_entrypoint(entrypoint):
+    # Remove .py from specified entrypoint (developer experience).
+    entrypoint = entrypoint.replace('.py', '')
+
+    if ':' in entrypoint:
+        split = entrypoint.split(':')
+        if len(split) > 2:
+            print(
+                "Please provide the entrypoint in 'module:microservice' format."
+            )
+            sys.exit(1)
+        import_name = split[0]
+        microservice = split[1]
+
+    else:
+        import_name = entrypoint
+        microservice = 'service'
+
+    module = __import__(import_name)
+    return getattr(module, microservice)
+
+
+def cli():
+    """OMG.py Generator.
+
+Usage:
+  omg-generate [<entrypoint>]
+
+Generates a microservice.yml file, based on the omg.py Microservice entrypoint given.
+
+Options:
+  -h --help     Show this screen.
+    """
+
+    sys.path += [os.getcwd()]
+    args = docopt(cli.__doc__)
+    entrypoint = args['<entrypoint>']
+
+    # Sane defaults.
+    entrypoint = entrypoint if entrypoint else 'service:service'
+
+    # Import the microservice.
+    try:
+        service = import_entrypoint(entrypoint=entrypoint)
+    except (ImportError, ModuleNotFoundError) as e:
+        print(f'Problem importing {entrypoint!r}.')
+        traceback.print_traceback(e)
+        print('Aborting.')
+        sys.exit(1)
+
+    # Run ensure on microservice.
+    try:
+        service = service.ensure(skip_if_exists=False)
+        print()
+        print('{!r} written to disk!'.format('microservice.yml'))
+    except AttributeError:
+        print(
+            f'The entrypoint provided ({entrypoint!r}) does not appear to be a Microservice instance.'
+        )
+        print('Aborting.')
+        sys.exit(1)
+
+
+if __name__ == '__main__':
+    cli()

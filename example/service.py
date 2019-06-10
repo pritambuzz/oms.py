@@ -1,7 +1,7 @@
-import micro
+import omg
 from uuid import uuid4
 
-service = micro.Service(name='uuid')
+service = omg.Microservice(name='uuid')
 
 
 @service.register()

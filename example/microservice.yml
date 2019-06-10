@@ -1,5 +1,5 @@
 actions:
-  new:
+  New:
     arguments:
       prefix:
         in: query

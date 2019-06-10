@@ -18,10 +18,17 @@ URL = 'https://github.com/microservices/omg.py'
 EMAIL = 'me@kennethreitz.org'
 AUTHOR = 'Asyncy'
 REQUIRES_PYTHON = '>=3.6.0'
-VERSION = '0.3.2'
+VERSION = '0.4.0'
 
 # What packages are required for this module to be executed?
-REQUIRED = ['pyyaml', 'Flask', 'waitress', 'setproctitle']
+REQUIRED = [
+    'pyyaml',
+    'Flask',
+    'waitress',
+    'setproctitle',
+    'docopt',
+    'inflection',
+]
 
 # What packages are optional?
 EXTRAS = {
@@ -108,9 +115,7 @@ setup(
     # ),
     # If your package is a single module, use this instead of 'packages':
     py_modules=['omg'],
-    # entry_points={
-    #     'console_scripts': ['mycli=mymodule:cli'],
-    # },
+    entry_points={'console_scripts': ['omg-generate=omg:cli']},
     install_requires=REQUIRED,
     extras_require=EXTRAS,
     include_package_data=True,

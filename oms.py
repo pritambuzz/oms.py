@@ -16,7 +16,7 @@ DEFAULT_PORT = '8080'
 DEFAULT_ARG_TYPE = str
 PORT = int(os.environ.get('PORT', DEFAULT_PORT))
 YAML_TEMPLATE = """
-omg: 1
+oms: 1
 lifecycle:
   startup:
     command: ["python3", "/app/service.py"]
@@ -56,7 +56,7 @@ class MicroserviceDockerfile:
 class MicroserviceYML:
     @property
     def _yaml_path(self):
-        return './microservice.yml'
+        return './oms.yml'
 
     @staticmethod
     def _yaml_type_for_annotation(t):
@@ -196,7 +196,7 @@ class Microservice(MicroserviceYML, MicroserviceDockerfile):
 
         def view_func(**kwargs):
 
-            # Check type annoytations of enpoint function,
+            # Check type annotations of endpoint function,
             # Flag query parameters as usable, if it appears to be applicable.
 
             params = {}
@@ -211,8 +211,8 @@ class Microservice(MicroserviceYML, MicroserviceDockerfile):
                     if arg in json:
                         params[arg] = json[arg]
 
-                # TODO:; grab values from HTTP Headers.
-                # TODO:  gab balues from multipart upload.
+                # TODO: grab values from HTTP Headers.
+                # TODO: grab values from multipart upload.
 
             # Pass all query parameters as function arguments, if applicable.
             print(f'Calling {rule!r} with args: {params!r}.')
@@ -277,12 +277,12 @@ def import_entrypoint(entrypoint):
 
 
 def cli():
-    """OMG.py Generator.
+    """OMS.py Generator.
 
 Usage:
-  omg-generate [<entrypoint>]
+  oms-generate [<entrypoint>]
 
-Generates a microservice.yml file, based on the omg.py Microservice entrypoint given.
+Generates a oms.yml file, based on the oms.py Microservice entrypoint given.
 
 Options:
   -h --help     Show this screen.
@@ -308,7 +308,7 @@ Options:
     try:
         service = service.ensure(skip_if_exists=False)
         print()
-        print('{!r} written to disk!'.format('microservice.yml'))
+        print('{!r} written to disk!'.format('oms.yml'))
     except AttributeError:
         print(
             f'The entrypoint provided ({entrypoint!r}) does not appear to be a Microservice instance.'

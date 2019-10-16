@@ -28,4 +28,4 @@ lifecycle:
     command:
     - python3
     - /app/service.py
-omg: 1
+oms: 1

@@ -1,3 +1,3 @@
 clean:
 	rm Dockerfile
-	rm microservice.yml
+	rm oms.yml

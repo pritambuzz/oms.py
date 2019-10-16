@@ -1,8 +1,8 @@
-# omg.py
+# oms.py
 
-A micro-framework for the excellent **[Open Microservices Guide](https://microservices.guide/)**, for suppportive code written in Python 3.6+.
+A micro-framework for the excellent **[Open Microservices Specification](https://microservices.guide/)**, for suppportive code written in Python 3.6+.
 
-**Note**: this is pre-release software, and is subject to improvement. Contributions are welcome! This framework is being developed for [other languages](https://github.com/microservices?utf8=%E2%9C%93&q=omg.*&type=&language=), as well. If you'd like to help, [let us know](kenneth@storyscript.io)!
+**Note**: this is pre-release software, and is subject to improvement. Contributions are welcome! This framework is being developed for [other languages](https://github.com/microservices?utf8=%E2%9C%93&q=oms.*&type=&language=), as well. If you'd like to help, [let us know](support@storyscript.io)!
 
 # Intended / Example Usage
 
@@ -10,10 +10,10 @@ A micro-framework for the excellent **[Open Microservices Guide](https://microse
 $ cat service.py
 ```
 ```python
-import omg
+import oms
 from uuid import uuid4
 
-service = omg.Microservice(name='uuid')
+service = oms.Microservice(name='uuid')
 
 @service.register()
 def new(prefix: str) -> str:
@@ -26,16 +26,16 @@ if __name__ == '__main__':
 
 `register` takes some optional arguments: `name` and `path`. You can also call `service.add(f=new)`, instead.
 
-Next, run the command `$ omg-generate` `microservice.yml` files will automatically be generated, for your application:
+Next, run the command `$ oms-generate` `oms.yml` files will automatically be generated, for your application:
 
 ```shell
-$ omg-generate service:service
+$ oms-generate service:service
 …
-'microservice.yml' written to disk!
+'oms.yml' written to disk!
 ```
 
 ```yaml
-$ cat microservice.yml
+$ cat oms.yml
 actions:
   new:
     help: Generates a UUID, with a given prefix.
@@ -55,7 +55,7 @@ lifecycle:
     command:
     - python3
     - /app/service.py
-omg: 1
+oms: 1
 
 ```
 
@@ -73,23 +73,23 @@ $ python service.py
 2019-05-09 14:45:39,342 - micro - DEBUG - Initiating 'uuid' service.
 2019-05-09 14:45:39,344 - micro - DEBUG - Registering Flask endpoint: '/new'
 2019-05-09 14:45:39,344 - micro - DEBUG - Dockerfile './Dockerfile' already exists!
-2019-05-09 14:45:39,345 - micro - DEBUG - Microservice Manifest './microservice.yml' already exists!
+2019-05-09 14:45:39,345 - micro - DEBUG - Microservice Manifest './oms.yml' already exists!
 2019-05-09 14:45:39,346 - micro - INFO - Serving on: '*:8080'
 ```
 
 This will spawn a Flask application (using the production-ready [waitress web server](https://docs.pylonsproject.org/projects/waitress/en/stable/)), preconfigured to serve the masses!
 
-Or, use the [omg-cli](https://github.com/microservices/omg-cli):
+Or, use the [oms](https://github.com/microservices/oms) CLI:
 
 ```shell
-$ omg run new -a prefix='user-'
+$ oms run new -a prefix='user-'
 …
 ```
 
 ## Installation
 
 ```shell
-$ pip install omg.py
+$ pip install
 ```
 
 **P.S.** Do provide feedback, if you desire! :)

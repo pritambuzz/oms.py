@@ -6,7 +6,7 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
-omg-micro = ">=0.3.2"
+oms = ">=0.3.2"
 
 [requires]
 python_version = "3.7"

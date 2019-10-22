@@ -67,7 +67,7 @@ def test_yaml_generation(f, service):
     service.add(f=f, name='hi', path='/bye')
 
     data = service._render()
-    assert 'omg' in data
+    assert 'oms' in data
     assert 'actions' in data
 
     assert data['actions']['hi']['http']['path'] == '/bye'

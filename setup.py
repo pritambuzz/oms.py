@@ -12,13 +12,13 @@ from shutil import rmtree
 from setuptools import find_packages, setup, Command
 
 # Package meta-data.
-NAME = 'omg-micro'
-DESCRIPTION = 'A micro-framework for the OMG, and code written in Python 3.6+.'
-URL = 'https://github.com/microservices/omg.py'
-EMAIL = 'me@kennethreitz.org'
-AUTHOR = 'Asyncy'
+NAME = 'oms'
+DESCRIPTION = 'A micro-framework for the OMS, and code written in Python 3.6+.'
+URL = 'https://github.com/microservices/oms.py'
+EMAIL = 'support@storyscript.io'
+AUTHOR = 'Storyscript'
 REQUIRES_PYTHON = '>=3.6.0'
-VERSION = '0.4.0'
+VERSION = '0.5.0'
 
 # What packages are required for this module to be executed?
 REQUIRED = [
@@ -114,8 +114,8 @@ setup(
     #     exclude=["tests", "*.tests", "*.tests.*", "tests.*"]
     # ),
     # If your package is a single module, use this instead of 'packages':
-    py_modules=['omg'],
-    entry_points={'console_scripts': ['omg-generate=omg:cli']},
+    py_modules=['oms'],
+    entry_points={'console_scripts': ['oms-generate=oms:cli']},
     install_requires=REQUIRED,
     extras_require=EXTRAS,
     include_package_data=True,

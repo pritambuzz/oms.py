@@ -4,6 +4,13 @@ A micro-framework for the excellent **[Open Microservices Specification](https:/
 
 **Note**: this is pre-release software, and is subject to improvement. Contributions are welcome! This framework is being developed for [other languages](https://github.com/microservices?utf8=%E2%9C%93&q=oms.*&type=&language=), as well. If you'd like to help, [let us know](support@storyscript.io)!
 
+
+## Installation
+
+```shell
+$ pip install --user oms
+```
+
 # Intended / Example Usage
 
 ```shell
@@ -84,12 +91,6 @@ Or, use the [oms](https://github.com/microservices/oms) CLI:
 ```shell
 $ oms run new -a prefix='user-'
 …
-```
-
-## Installation
-
-```shell
-$ pip install
 ```
 
 **P.S.** Do provide feedback, if you desire! :)

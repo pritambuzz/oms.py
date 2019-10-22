@@ -2,7 +2,7 @@
 
 A micro-framework for the excellent **[Open Microservices Specification](https://openmicroservices.org)**, for suppportive code written in Python 3.6+.
 
-**Note**: this is pre-release software, and is subject to improvement. Contributions are welcome! This framework is being developed for [other languages](https://github.com/microservices?utf8=%E2%9C%93&q=oms.*&type=&language=), as well. If you'd like to help, [let us know](support@storyscript.io)!
+**Note**: this is pre-release software, and is subject to improvement. Contributions are welcome! This framework is being developed for [other languages](https://github.com/microservices?utf8=%E2%9C%93&q=oms.*&type=&language=), as well. If you'd like to help, [let us know](mailto:support@storyscript.io)!
 
 
 ## Installation

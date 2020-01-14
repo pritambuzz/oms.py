@@ -1,4 +1,5 @@
 # oms.py
+[![Run on Repl.it](https://repl.it/badge/github/pritambuzz/oms.py)](https://repl.it/github/pritambuzz/oms.py)
 
 A micro-framework for the excellent **[Open Microservices Specification](https://openmicroservices.org)**, for suppportive code written in Python 3.6+.
 
